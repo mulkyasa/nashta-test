@@ -31,14 +31,21 @@ export default function Item(props) {
         </div>
         <div className="list-group list-group-flush">
           <div className="list-group-item">
-            <p className="mb-0">
+            {/* <p className="mb-0">
               <small>{props.events.datas.members}</small>
-            </p>
-            {/* {props.events.datas.members.map((item, index) => (
-              <p key={index} className="mb-0">
-                <small>{item}</small>
-              </p>
-            ))} */}
+            </p> */}
+            <div className="row">
+              {props.events.datas.members.map((item, index) => (
+                <div key={index} className="col">
+                  <div className="media">
+                    <img src={require("../user-picture.jpg")} className="align-self-center profile-pict mr-1" alt="..."/>
+                    <div className="media-body">
+                      <small>{item}</small>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         <div className="card-footer">

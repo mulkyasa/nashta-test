@@ -41,7 +41,7 @@ class AddEvent extends Component {
                 <div className="card-body">
                   <h5 className="card-title mb-0">Add Event</h5>
                   <small className="text-muted">Add new upcoming event.</small>
-                  <form className="mt-2">
+                  <form className="mt-2" onSubmit={this.handleSubmit}>
                     <div className="form-group">
                       <label htmlFor="title">Title</label>
                       <input
@@ -52,6 +52,7 @@ class AddEvent extends Component {
                         className="form-control"
                         id="title"
                         placeholder="Event title"
+                        required
                       />
                     </div>
                     <div className="row">
@@ -66,6 +67,7 @@ class AddEvent extends Component {
                             className="form-control"
                             id="location"
                             placeholder="Event location"
+                            required
                           />
                         </div>
                       </div>
@@ -79,6 +81,7 @@ class AddEvent extends Component {
                             onChange={this.handleChange}
                             className="form-control"
                             id="date"
+                            required
                           />
                         </div>
                       </div>
@@ -93,6 +96,7 @@ class AddEvent extends Component {
                         className="form-control"
                         id="participant"
                         placeholder="Participant name"
+                        required
                       />
                     </div>
                     <div className="form-group">
@@ -104,6 +108,7 @@ class AddEvent extends Component {
                         onChange={this.handleChange}
                         id="note"
                         rows="3"
+                        required
                       ></textarea>
                     </div>
                     <button type="submit" className="btn btn-primary">

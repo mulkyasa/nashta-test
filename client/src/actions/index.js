@@ -32,15 +32,29 @@ export const loadEvent = () => {
   };
 };
 
-// start post event data
-const postEventSuccess = (event) => ({
-  type: 'POST_EVENT_SUCCESS',
-  event
+// start load event data on dashboard
+export const loadDashboardSuccess = (events) => ({
+  type: 'LOAD_DASHBOARD_SUCCESS', events
 })
 
-const postEventFailure = (id) => ({
-  type: 'POST_EVENT_FAILURE', id
+export const loadDashboardFailure = () => ({
+  type: 'LOAD_DASHBOARD_FAILURE'
 })
+
+export const loadDashboard = (id) => ({
+  type: 'LOAD_DASHBOARD', id
+})
+
+// start post event data
+const postEventSuccess = (event) => ({
+  type: "POST_EVENT_SUCCESS",
+  event,
+});
+
+const postEventFailure = (id) => ({
+  type: "POST_EVENT_FAILURE",
+  id,
+});
 
 const postEventRedux = (id, title, location, date, members, note) => ({
   type: "POST_EVENT",
@@ -56,6 +70,8 @@ export const postEvent = (title, location, date, members, note) => {
   let id = Date.now();
   return (dispatch) => {
     dispatch(postEventRedux(id, title, location, date, members, note))
+    return request
+      .post("/", {id, title, location, date, members, note})
       .then(function (response) {
         dispatch(postEventSuccess(response.data));
         history.push("/");

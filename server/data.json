@@ -12,15 +12,5 @@
       ],
       "note": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
     }
-  },
-  {
-    "id": 1592847195719,
-    "datas": {
-      "location": "Klender, Jakarta",
-      "title": "Meeting With Client",
-      "date": "2020-07-12",
-      "members": "John Doe",
-      "note": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget gravida neque. Suspendisse convallis id ipsum laoreet congue. In a."
-    }
   }
 ]

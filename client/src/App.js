@@ -3,7 +3,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import history from "./history";
 import PageWrapper from "./components/PageWrapper";
 import AddEvent from "./containers/AddEvent";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./containers/Dashboard";
 
 export default function App() {
   return (

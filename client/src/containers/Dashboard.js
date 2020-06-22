@@ -1,7 +1,13 @@
 import React, { Component, Fragment } from "react";
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
+import { loadDashboard } from "../actions";
+import { connect } from "react-redux";
 
-export default class Dasboard extends Component {
+class Dashboard extends Component {
+  componentDidMount() {
+    this.props.loadDashboard();
+  }
+
   render() {
     return (
       <Fragment>
@@ -45,3 +51,16 @@ export default class Dasboard extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  events: state.dashboard.events
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  loadDashboard: () => dispatch(loadDashboard())
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dashboard)
