@@ -12,6 +12,11 @@ body {
   text-decoration: none !important
 }
 
-.no-border-bottom {
-  border-bottom: 0;
+.pp-user {
+  border-radius: 100%;
+  max-height: 24px;
+}
+
+input::placeholder {
+  font-size: 0.9rem;
 }

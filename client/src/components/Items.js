@@ -1,0 +1,52 @@
+import React from "react";
+import Moment from "react-moment";
+
+export default function Item(props) {
+  return (
+    <div className="col-md-4">
+      <div className="card shadow-sm mb-4">
+        <img
+          className="card-img-top"
+          src={require("../meeting.jpg")}
+          alt="Card Header"
+        />
+        <div className="card-body py-2">
+          <p className="card-text mb-1">
+            <small>
+              <i
+                className="fa fa-map-marker text-danger mr-1"
+                aria-hidden="true"
+              ></i>
+              {props.events.datas.location}
+            </small>
+          </p>
+          <h4 className="card-title mb-0">{props.events.datas.title}</h4>
+          <p className="card-text text-muted">
+            <small>
+              <Moment format="D MMMM YYYY" withTitle>
+                {props.events.datas.date}
+              </Moment>
+            </small>
+          </p>
+        </div>
+        <div className="list-group list-group-flush">
+          <div className="list-group-item">
+            <p className="mb-0">
+              <small>{props.events.datas.members}</small>
+            </p>
+            {/* {props.events.datas.members.map((item, index) => (
+              <p key={index} className="mb-0">
+                <small>{item}</small>
+              </p>
+            ))} */}
+          </div>
+        </div>
+        <div className="card-footer">
+          <small className="text-muted">
+            <strong className="text-bold">Note :</strong> {props.events.datas.note}
+          </small>
+        </div>
+      </div>
+    </div>
+  );
+}
