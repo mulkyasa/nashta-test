@@ -20,8 +20,8 @@ class Dashboard extends Component {
   receivedData = () => {
     this.props.loadEvent();
 
-    let search = this.state.search.trim().toLowerCase();
     let filteredData = this.props.events;
+    let search = this.state.search.trim().toLowerCase();
     const { offset, perPage } = this.state;
 
     filteredData = filteredData.slice(offset, offset + perPage);
