@@ -14,16 +14,15 @@
     }
   },
   {
-    "id": 1592909680453,
+    "id": 1592925430757,
     "datas": {
-      "id": 1592909680427,
-      "title": "Meeting Class",
+      "id": 1592925430722,
+      "title": "Meeting With Governant",
       "location": "Margonda, Depok",
-      "date": "2020-07-03",
+      "date": "2020-07-02",
       "members": [
         "John Doe",
-        "Irfan Hakim",
-        "Wadud Maulana"
+        "Setnof"
       ],
       "note": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce neque dui, aliquam non ligula non, laoreet mollis massa. Etiam id varius orci. Nullam quis tortor lectus."
     }

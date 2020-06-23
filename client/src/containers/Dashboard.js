@@ -5,41 +5,15 @@ import { connect } from "react-redux";
 import DashboardItems from "../components/DashboardItems";
 
 class Dashboard extends Component {
-  state = {
-    data: [],
-    search: ""
-  };
-
   componentDidMount() {
-    this.getData();
-  }
-
-  getData = () => {
-    const newData = this.props.loadDashboard();
-    console.log(this.props.loadDashboard(), "loadDashboard")
-    console.log(newData, "newData");
-    this.setState({ data: [newData] });
-  };
-
-  dataFiltered = this.state.data.filter(item => {
-    const location = `${item.location}`;
-    if (location.toLowerCase().includes(this.state.search.toLowerCase())) {
-      return item;
-    }
-  });
-
-  handleSearch = (event) => {
-    this.setState({ search: event.target.value });
+    this.props.loadDashboard();
   }
 
   render() {
-    // console.log(this.state.data);
-    const dashboardItems = this.state.data.map((item, index) => (
-      <DashboardItems
-        key={index}
-        events={{...item}}
-      />
-    ));
+    console.log(this.props.events, "props events");
+    // const dashboardItems = this.props.events.map((item, index) => (
+    //   <DashboardItems key={index} events={{ ...item }} />
+    // ));
 
     return (
       <Fragment>
@@ -68,7 +42,9 @@ class Dashboard extends Component {
                       <th scope="col">Note</th>
                     </tr>
                   </thead>
-                  <tbody>{dashboardItems}</tbody>
+                  <tbody>
+                    {/* {dashboardItems} */}
+                  </tbody>
                 </table>
               </div>
             </div>
@@ -80,7 +56,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  events: state.dashboard.events.data,
+  events: state.dashboard,
 });
 
 const mapDispatchToProps = (dispatch) => ({

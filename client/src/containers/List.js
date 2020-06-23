@@ -9,13 +9,21 @@ class List extends Component {
   }
 
   render() {
-    console.log(this.props.events, "List")
+    // console.log(typeof(this.props.events), "List")
     const listItems = this.props.events.map((item, index) => (
       <Items
         key={index}
         events={{...item}}
       />
     ));
+
+    if (listItems === 'undefined') {
+      return (
+        <div>
+          Not found!
+        </div>
+      )
+    }
 
     return (
       <div className="row">
@@ -25,7 +33,7 @@ class List extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => (console.log(state.events, "state.events"),{
   events: state.events
 })
 

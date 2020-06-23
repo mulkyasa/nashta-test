@@ -1,6 +1,7 @@
 const events = (state = [], action) => {
   switch (action.type) {
     case "LOAD_EVENT_SUCCESS":
+      console.log(action.events.data, "events");
       return action.events.data.map((item) => {
         item.sent = true;
         return item;
