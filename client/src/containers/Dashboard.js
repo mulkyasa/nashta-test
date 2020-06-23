@@ -2,15 +2,45 @@ import React, { Component, Fragment } from "react";
 import Navbar from "../components/Navbar";
 import { loadDashboard } from "../actions";
 import { connect } from "react-redux";
+import DashboardItems from "../components/DashboardItems";
 
 class Dashboard extends Component {
+  state = {
+    data: [],
+    search: ""
+  };
+
   componentDidMount() {
-    this.props.loadDashboard();
+    this.getData();
   }
 
-  
+  getData = () => {
+    const newData = this.props.loadDashboard();
+    console.log(this.props.loadDashboard(), "loadDashboard")
+    console.log(newData, "newData");
+    this.setState({ data: [newData] });
+  };
+
+  dataFiltered = this.state.data.filter(item => {
+    const location = `${item.location}`;
+    if (location.toLowerCase().includes(this.state.search.toLowerCase())) {
+      return item;
+    }
+  });
+
+  handleSearch = (event) => {
+    this.setState({ search: event.target.value });
+  }
+
   render() {
-    console.log(this.props);
+    // console.log(this.state.data);
+    const dashboardItems = this.state.data.map((item, index) => (
+      <DashboardItems
+        key={index}
+        events={{...item}}
+      />
+    ));
+
     return (
       <Fragment>
         <Navbar />
@@ -19,7 +49,11 @@ class Dashboard extends Component {
             <div className="card-body">
               <form>
                 <div className="form-group">
-                  <input type="text" className="form-control w-25" placeholder="Search"/>
+                  <input
+                    type="text"
+                    className="form-control w-25"
+                    placeholder="Search"
+                  />
                 </div>
               </form>
               <div className="table-responsive">
@@ -34,35 +68,23 @@ class Dashboard extends Component {
                       <th scope="col">Note</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Meeting with CEO</td>
-                      <td>Pisangan Timur, Jakarta</td>
-                      <td>17 Agustus 2020</td>
-                      <td>John Doe</td>
-                      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis scelerisque libero sit amet lorem. Consectetur adipiscing elit.</td>
-                    </tr>
-                  </tbody>
+                  <tbody>{dashboardItems}</tbody>
                 </table>
               </div>
             </div>
           </div>
         </div>
       </Fragment>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => ({
-  events: state.dashboard.events
-})
+  events: state.dashboard.events.data,
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  loadDashboard: () => dispatch(loadDashboard())
-})
+  loadDashboard: () => dispatch(loadDashboard()),
+});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Dashboard)
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

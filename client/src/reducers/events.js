@@ -36,6 +36,10 @@ const events = (state = [], action) => {
         return item;
       });
 
+    case "DELETE_EVENT":
+      return state.filter((item) => item.id !== action.id);
+
+    case "DELETE_EVENT_SUCCESS":
     case "LOAD_EVENT_FAILURE":
     default:
       return state;

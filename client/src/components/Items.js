@@ -1,10 +1,13 @@
 import React from "react";
 import Moment from "react-moment";
 
-export default function Item(props) {
+export default function Items(props) {
   return (
     <div className="col-md-4">
       <div className="card shadow-sm mb-4">
+        <button type="button" onClick={props.delete} className="delete-btn">
+          <i className="fa fa-trash"></i>
+        </button>
         <img
           className="card-img-top"
           src={require("../meeting.jpg")}
@@ -33,9 +36,13 @@ export default function Item(props) {
           <div className="list-group-item">
             <div className="row">
               {props.events.datas.members.map((item, index) => (
-                <div key={index} className="col-md-auto">
+                <div key={index} className="col-auto mb-1">
                   <div className="media">
-                    <img src={require("../user-picture.jpg")} className="align-self-center profile-pict mr-1" alt="..."/>
+                    <img
+                      src={require("../user-picture.jpg")}
+                      className="align-self-center profile-pict mr-1"
+                      alt="..."
+                    />
                     <div className="media-body">
                       <small>{item}</small>
                     </div>
@@ -47,7 +54,8 @@ export default function Item(props) {
         </div>
         <div className="card-footer">
           <small className="text-muted">
-            <strong className="text-bold">Note :</strong> {props.events.datas.note}
+            <strong className="text-bold">Note :</strong>{" "}
+            {props.events.datas.note}
           </small>
         </div>
       </div>

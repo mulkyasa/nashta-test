@@ -1,7 +1,7 @@
 const dashboard = (state = { events: [] }, action) => {
   switch (action.type) {
     case "LOAD_DASHBOARD_SUCCESS":
-      console.log(action.events, "ini detail");
+      // console.log(typeof(action.events), "ini detail");
       return {
         ...state,
         events: action.events,

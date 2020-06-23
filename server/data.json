@@ -14,17 +14,18 @@
     }
   },
   {
-    "id": 1592872031515,
+    "id": 1592909680453,
     "datas": {
-      "id": 1592872031482,
-      "title": "Meeting",
-      "location": "Dago, Bandung",
-      "date": "2020-10-08",
+      "id": 1592909680427,
+      "title": "Meeting Class",
+      "location": "Margonda, Depok",
+      "date": "2020-07-03",
       "members": [
         "John Doe",
-        "Yasa Mulky A."
+        "Irfan Hakim",
+        "Wadud Maulana"
       ],
-      "note": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      "note": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce neque dui, aliquam non ligula non, laoreet mollis massa. Etiam id varius orci. Nullam quis tortor lectus."
     }
   }
 ]
