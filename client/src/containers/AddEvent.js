@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import Navbar from "../components/Navbar";
 import { postEvent } from "../actions";
 import { connect } from "react-redux";
+import history from "../history";
 
 class AddEvent extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class AddEvent extends Component {
       title: "",
       location: "",
       date: "",
+      memberInput: "",
       members: [],
       note: "",
     };
@@ -19,8 +21,28 @@ class AddEvent extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleSubmit = (event) => {
+  handleMemberChange = (event) => {
+    this.setState({ memberInput: event.target.value })
+  }
+
+  addMember = () => {
+    this.setState({
+      members: [...this.state.members, this.state.memberInput],
+    });
+    this.setState({
+      memberInput: ""
+    });
+  };
+
+  deleteMembers = (event, id) => {
     event.preventDefault();
+    console.log(this.state.members);
+    this.setState((state) => ({
+      members: state.members.filter((item) => item.id !== id),
+    }));
+  };
+
+  handleSubmit = (event) => {
     this.props.postEvent(
       this.state.title,
       this.state.location,
@@ -28,6 +50,8 @@ class AddEvent extends Component {
       this.state.members,
       this.state.note
     );
+    history.push("/");
+    event.preventDefault();
   };
 
   render() {
@@ -88,16 +112,44 @@ class AddEvent extends Component {
                     </div>
                     <div className="form-group">
                       <label htmlFor="participant">Participant</label>
-                      <input
-                        type="text"
-                        name="members"
-                        value={this.state.members}
-                        onChange={this.handleChange}
-                        className="form-control"
-                        id="participant"
-                        placeholder="Participant name"
-                        required
-                      />
+                      <div className="input-group">
+                        <input
+                          type="text"
+                          name="members"
+                          value={this.state.memberInput}
+                          onChange={this.handleMemberChange}
+                          className="form-control"
+                          id="participant"
+                          placeholder="Participant name"
+                        />
+                        <div className="input-group-append">
+                          <button
+                            type="button"
+                            className="btn btn-outline-secondary"
+                            onClick={this.addMember}
+                          >
+                            <i className="fa fa-plus"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div className="row">
+                        {this.state.members.map((item, index) => (
+                          <div key={index} className="col-md-auto">
+                            <div className="card mt-2">
+                              <div className="card-body py-1 px-2">
+                                {item}
+                                {/* <a
+                                  href="/add"
+                                  onClick={this.deleteMembers}
+                                  className="ml-2"
+                                >
+                                  <i className="fa fa-times-circle text-dark"></i>
+                                </a> */}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                     <div className="form-group">
                       <label htmlFor="note">Note</label>

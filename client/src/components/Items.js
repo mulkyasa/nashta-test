@@ -31,12 +31,9 @@ export default function Item(props) {
         </div>
         <div className="list-group list-group-flush">
           <div className="list-group-item">
-            {/* <p className="mb-0">
-              <small>{props.events.datas.members}</small>
-            </p> */}
             <div className="row">
               {props.events.datas.members.map((item, index) => (
-                <div key={index} className="col">
+                <div key={index} className="col-md-auto">
                   <div className="media">
                     <img src={require("../user-picture.jpg")} className="align-self-center profile-pict mr-1" alt="..."/>
                     <div className="media-body">

@@ -1,5 +1,4 @@
 import axios from "axios";
-import history from "../history";
 
 const API_URL = "http://localhost:3000";
 
@@ -74,7 +73,6 @@ export const postEvent = (title, location, date, members, note) => {
       .post("/", {id, title, location, date, members, note})
       .then(function (response) {
         dispatch(postEventSuccess(response.data));
-        history.push("/");
       })
       .catch(function (error) {
         console.error(error);
