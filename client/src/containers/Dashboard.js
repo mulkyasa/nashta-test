@@ -3,30 +3,28 @@ import Navbar from "../components/Navbar";
 import { loadEvent } from "../actions";
 import { connect } from "react-redux";
 import DashboardItems from "../components/DashboardItems";
+import ReactPaginate from 'react-paginate';
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       search: "",
+      offset: 0,
+      data: [],
+      perPage: 5,
+      currentPage: 0
     };
   }
 
-  handleSearchChange = (event) => {
-    this.setState({ search: event.target.value });
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-  }
-
-  componentDidMount() {
+  receivedData = () => {
     this.props.loadEvent();
-  }
 
-  render() {
     let search = this.state.search.trim().toLowerCase();
     let filteredData = this.props.events;
+    const { offset, perPage } = this.state;
+
+    filteredData = filteredData.slice(offset, offset + perPage);
 
     if (search !== "") {
       filteredData = filteredData.filter(
@@ -42,21 +40,54 @@ class Dashboard extends Component {
       <DashboardItems key={index} id={index + 1} events={{ ...item }} />
     ));
 
+    this.setState({
+      pageCount: Math.ceil(filteredData.length / perPage),
+      listItems
+    })
+  }
+
+  handlePageClick = (e) => {
+    const selectedPage = e.selected;
+    const offset = selectedPage * this.state.perPage;
+
+    this.setState({
+      currentPage: selectedPage,
+      offset: offset
+    }, () => {
+      this.receivedData()
+    });
+  };
+
+  handleSearchChange = (event) => {
+    this.setState({ search: event.target.value });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
+  componentDidMount() {
+    this.receivedData();
+  }
+
+  render() {
     return (
       <Fragment>
         <Navbar />
         <div className="container">
           <div className="card shadow-sm">
             <div className="card-body">
-              <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className="form-control w-25"
-                    placeholder="Search"
-                    onChange={this.handleSearchChange}
-                    value={this.state.search}
-                  />
+              <form onSubmit={this.handleSubmit} className="row">
+                <div className="col-lg-4">
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Search"
+                      onChange={this.handleSearchChange}
+                      value={this.state.search}
+                    />
+                  </div>
                 </div>
               </form>
               <div className="table-responsive">
@@ -71,9 +102,22 @@ class Dashboard extends Component {
                       <th scope="col">Note</th>
                     </tr>
                   </thead>
-                  <tbody>{listItems}</tbody>
+                  <tbody>{this.state.listItems}</tbody>
                 </table>
               </div>
+              <ReactPaginate
+                previousLabel={"prev"}
+                nextLabel={"next"}
+                breakLabel={"..."}
+                breakClassName={"break-me"}
+                pageCount={this.state.pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={this.handlePageClick}
+                containerClassName={"pagination"}
+                subContainerClassName={"pages pagination"}
+                activeClassName={"active"}
+              />
             </div>
           </div>
         </div>

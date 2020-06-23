@@ -123,7 +123,7 @@ class AddEvent extends Component {
                         <div className="input-group-append">
                           <button
                             type="button"
-                            className="btn btn-outline-secondary"
+                            className="btn btn-outline-dark"
                             onClick={this.addMember}
                           >
                             <i className="fa fa-plus"></i>
