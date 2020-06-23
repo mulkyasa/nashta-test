@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import Navbar from "../components/Navbar";
 import { postEvent } from "../actions";
 import { connect } from "react-redux";
-import history from "../history";
 
 class AddEvent extends Component {
   constructor(props) {
@@ -43,6 +42,7 @@ class AddEvent extends Component {
   };
 
   handleSubmit = (event) => {
+    event.preventDefault();
     this.props.postEvent(
       this.state.title,
       this.state.location,
@@ -50,8 +50,6 @@ class AddEvent extends Component {
       this.state.members,
       this.state.note
     );
-    history.push("/");
-    event.preventDefault();
   };
 
   render() {

@@ -8,7 +8,9 @@ class Dashboard extends Component {
     this.props.loadDashboard();
   }
 
+  
   render() {
+    console.log(this.props);
     return (
       <Fragment>
         <Navbar />
