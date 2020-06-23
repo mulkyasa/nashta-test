@@ -32,30 +32,6 @@ export const loadEvent = () => {
   };
 };
 
-// start load event data on dashboard
-export const loadDashboardSuccess = (events) => ({
-  type: "LOAD_DASHBOARD_SUCCESS",
-  events,
-});
-
-export const loadDashboardFailure = () => ({
-  type: "LOAD_DASHBOARD_FAILURE",
-});
-
-export const loadDashboard = () => {
-  return (dispatch) => {
-    return request
-      .get("/")
-      .then(function (response) {
-        dispatch(loadDashboardSuccess(response.data));
-      })
-      .catch(function (error) {
-        console.error(error);
-        dispatch(loadDashboardFailure());
-      });
-  };
-};
-
 // start post event data
 const postEventSuccess = (event) => ({
   type: "POST_EVENT_SUCCESS",

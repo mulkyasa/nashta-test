@@ -9,39 +9,21 @@ class List extends Component {
   }
 
   render() {
-    // console.log(typeof(this.props.events), "List")
+    console.log(typeof this.props.events, "List");
     const listItems = this.props.events.map((item, index) => (
-      <Items
-        key={index}
-        events={{...item}}
-      />
+      <Items key={index} events={{ ...item }} />
     ));
 
-    if (listItems === 'undefined') {
-      return (
-        <div>
-          Not found!
-        </div>
-      )
-    }
-
-    return (
-      <div className="row">
-        { listItems }
-      </div>
-    );
+    return <div className="row">{listItems}</div>;
   }
 }
 
-const mapStateToProps = (state) => (console.log(state.events, "state.events"),{
-  events: state.events
-})
+const mapStateToProps = (state) => ({
+  events: state.events,
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  loadEvent: () => dispatch(loadEvent())
-})
+  loadEvent: () => dispatch(loadEvent()),
+});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(List)
+export default connect(mapStateToProps, mapDispatchToProps)(List);
