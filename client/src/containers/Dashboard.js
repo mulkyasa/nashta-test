@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 import { loadEvent } from "../actions";
 import { connect } from "react-redux";
 import DashboardItems from "../components/DashboardItems";
-import ReactPaginate from 'react-paginate';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -17,14 +16,21 @@ class Dashboard extends Component {
     };
   }
 
-  receivedData = () => {
+  handleSearchChange = (event) => {
+    this.setState({ search: event.target.value });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
+  componentDidMount() {
     this.props.loadEvent();
+  }
 
-    let filteredData = this.props.events;
+  render() {
     let search = this.state.search.trim().toLowerCase();
-    const { offset, perPage } = this.state;
-
-    filteredData = filteredData.slice(offset, offset + perPage);
+    let filteredData = this.props.events;
 
     if (search !== "") {
       filteredData = filteredData.filter(
@@ -40,37 +46,6 @@ class Dashboard extends Component {
       <DashboardItems key={index} id={index + 1} events={{ ...item }} />
     ));
 
-    this.setState({
-      pageCount: Math.ceil(filteredData.length / perPage),
-      listItems
-    })
-  }
-
-  handlePageClick = (e) => {
-    const selectedPage = e.selected;
-    const offset = selectedPage * this.state.perPage;
-
-    this.setState({
-      currentPage: selectedPage,
-      offset: offset
-    }, () => {
-      this.receivedData()
-    });
-  };
-
-  handleSearchChange = (event) => {
-    this.setState({ search: event.target.value });
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-  }
-
-  componentDidMount() {
-    this.receivedData();
-  }
-
-  render() {
     return (
       <Fragment>
         <Navbar />
@@ -102,22 +77,9 @@ class Dashboard extends Component {
                       <th scope="col">Note</th>
                     </tr>
                   </thead>
-                  <tbody>{this.state.listItems}</tbody>
+                  <tbody>{listItems}</tbody>
                 </table>
               </div>
-              <ReactPaginate
-                previousLabel={"prev"}
-                nextLabel={"next"}
-                breakLabel={"..."}
-                breakClassName={"break-me"}
-                pageCount={this.state.pageCount}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
-                onPageChange={this.handlePageClick}
-                containerClassName={"pagination"}
-                subContainerClassName={"pages pagination"}
-                activeClassName={"active"}
-              />
             </div>
           </div>
         </div>

@@ -35,7 +35,6 @@ class AddEvent extends Component {
 
   deleteMembers = (event, id) => {
     event.preventDefault();
-    console.log(this.state.members);
     this.setState((state) => ({
       members: state.members.filter((item) => item.id !== id),
     }));

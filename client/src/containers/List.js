@@ -9,7 +9,7 @@ class List extends Component {
   }
 
   render() {
-    console.log(typeof this.props.events, "List");
+    console.log(this.props.events, "List");
     const listItems = this.props.events.map((item, index) => (
       <Items key={index} events={{ ...item }} />
     ));
