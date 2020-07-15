@@ -20,14 +20,14 @@ export default function Items(props) {
                 className="fa fa-map-marker text-danger mr-1"
                 aria-hidden="true"
               ></i>
-              {props.events.datas.location}
+              {props.events.location}
             </small>
           </p>
-          <h4 className="card-title mb-0">{props.events.datas.title}</h4>
+          <h4 className="card-title mb-0">{props.events.title}</h4>
           <p className="card-text text-muted">
             <small>
               <Moment format="D MMMM YYYY" withTitle>
-                {props.events.datas.date}
+                {props.events.date}
               </Moment>
             </small>
           </p>
@@ -35,7 +35,7 @@ export default function Items(props) {
         <div className="list-group list-group-flush">
           <div className="list-group-item">
             <div className="row">
-              {props.events.datas.members.map((item, index) => (
+              {props.events.members.map((item, index) => (
                 <div key={index} className="col-auto mb-1">
                   <div className="media">
                     <img
@@ -55,7 +55,7 @@ export default function Items(props) {
         <div className="card-footer">
           <small className="text-muted">
             <strong className="text-bold">Note :</strong>{" "}
-            {props.events.datas.note}
+            {props.events.note}
           </small>
         </div>
       </div>

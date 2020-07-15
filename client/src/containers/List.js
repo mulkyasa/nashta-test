@@ -7,9 +7,9 @@ class List extends Component {
   componentDidMount() {
     this.props.loadEvent();
   }
-
+  
   render() {
-    console.log(this.props.events, "List");
+    console.log(this.props.events)
     const listItems = this.props.events.map((item, index) => (
       <Items key={index} events={{ ...item }} />
     ));

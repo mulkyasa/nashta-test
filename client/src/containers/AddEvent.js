@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import Navbar from "../components/Navbar";
 import { postEvent } from "../actions";
 import { connect } from "react-redux";
+import ImageUpload from "../components/ImageUpload";
 
 class AddEvent extends Component {
   constructor(props) {
@@ -21,15 +22,15 @@ class AddEvent extends Component {
   };
 
   handleMemberChange = (event) => {
-    this.setState({ memberInput: event.target.value })
-  }
+    this.setState({ memberInput: event.target.value });
+  };
 
   addMember = () => {
     this.setState({
       members: [...this.state.members, this.state.memberInput],
     });
     this.setState({
-      memberInput: ""
+      memberInput: "",
     });
   };
 
@@ -47,7 +48,8 @@ class AddEvent extends Component {
       this.state.location,
       this.state.date,
       this.state.members,
-      this.state.note
+      this.state.note,
+      this.state.image
     );
   };
 
@@ -157,9 +159,11 @@ class AddEvent extends Component {
                         onChange={this.handleChange}
                         id="note"
                         rows="3"
+                        minLength="50"
                         required
                       ></textarea>
                     </div>
+                    <ImageUpload getURL={(image) => this.setState({ image })} />
                     <button type="submit" className="btn btn-primary">
                       Submit
                     </button>
@@ -182,8 +186,8 @@ class AddEvent extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  postEvent: (title, location, date, members, note) =>
-    dispatch(postEvent(title, location, date, members, note)),
+  postEvent: (title, location, date, members, note, image) =>
+    dispatch(postEvent(title, location, date, members, note, image)),
 });
 
 export default connect(null, mapDispatchToProps)(AddEvent);

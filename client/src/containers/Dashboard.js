@@ -9,19 +9,11 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       search: "",
-      offset: 0,
-      data: [],
-      perPage: 5,
-      currentPage: 0
     };
   }
 
   handleSearchChange = (event) => {
     this.setState({ search: event.target.value });
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault();
   }
 
   componentDidMount() {
@@ -30,20 +22,22 @@ class Dashboard extends Component {
 
   render() {
     let search = this.state.search.trim().toLowerCase();
+    console.log(search)
     let filteredData = this.props.events;
 
     if (search !== "") {
       filteredData = filteredData.filter(
         (item) =>
-          item.datas.title.toLowerCase().includes(search) ||
-          item.datas.location.toLowerCase().includes(search) ||
-          item.datas.date.toLowerCase().includes(search) ||
-          item.datas.members.toString().toLowerCase().includes(search)
+          item.id.toString().includes(search) ||
+          item.title.includes(search) ||
+          item.location.includes(search) ||
+          item.date.includes(search) ||
+          item.members.toString().includes(search)
       );
     }
 
     const listItems = filteredData.map((item, index) => (
-      <DashboardItems key={index} id={index + 1} events={{ ...item }} />
+      <DashboardItems key={index} events={{ ...item }} />
     ));
 
     return (
@@ -52,7 +46,7 @@ class Dashboard extends Component {
         <div className="container">
           <div className="card shadow-sm">
             <div className="card-body">
-              <form onSubmit={this.handleSubmit} className="row">
+              <form className="row">
                 <div className="col-lg-4">
                   <div className="form-group">
                     <input
